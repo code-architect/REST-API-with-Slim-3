@@ -45,3 +45,52 @@ $app->get('/api/customer/{id}', function(Request $request, Response $response){
     }
 
 });
+
+
+// Get a single customer data
+$app->post('/api/customer/add', function(Request $request, Response $response)
+{
+    $first_name = $request->getParam('first_name');
+    $last_name = $request->getParam('last_name');
+    $phone = $request->getParam('phone');
+    $email = $request->getParam('$email');
+    $address = $request->getParam('address');
+    $city = $request->getParam('city');
+    $state = $request->getParam('state');
+
+    $sql = "INSERT INTO customers (first_name, last_name, phone, email, address, city, state) VALUES 
+            (:first_name, :last_name, :phone, :email, :address, :city, :state)";
+
+    try{
+        $db = DB::connect();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([
+            ':first_name'   =>  $first_name,
+            ':last_name'    =>  $last_name,
+            ':phone'        =>  $phone,
+            ':email'        =>  $email,
+            ':address'      =>  $address,
+            ':city'         =>  $city,
+            ':state'        =>  $state
+        ]);
+
+        echo '{"notice": {"text": "Customer Added"}}';
+
+    }catch (PDOException $e)
+    {
+        echo '{"error" : {"text": '.$e->getMessage().'}}';
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
