@@ -2,17 +2,17 @@
 
 class DB
 {
-    private $dbHost = 'localhost';
-    private $dbUser = 'root';
-    private $dbPassword = '';
-    private $dbName = 'slim_api';
+    private static $dbHost = 'localhost';
+    private static $dbUser = 'root';
+    private static $dbPassword = '';
+    private static $dbName = 'slim_api';
 
 
     //connect
-    public function connect()
+    public static function connect()
     {
-        $mysql_conn_str = "mysql:host=$this->dbHost;dbname=$this->dbName;";
-        $dbConn = new PDO($mysql_conn_str, $this->dbUser, $this->dbPassword);
+        $mysql_conn_str = "mysql:host=".self::$dbHost.";dbname=".self::$dbName.";";
+        $dbConn = new PDO($mysql_conn_str, static::$dbUser, static::$dbPassword);
         $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $dbConn;
     }
