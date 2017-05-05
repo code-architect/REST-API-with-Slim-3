@@ -47,13 +47,13 @@ $app->get('/api/customer/{id}', function(Request $request, Response $response){
 });
 
 
-// Get a single customer data
+// Add a single customer data
 $app->post('/api/customer/add', function(Request $request, Response $response)
 {
     $first_name = $request->getParam('first_name');
     $last_name = $request->getParam('last_name');
     $phone = $request->getParam('phone');
-    $email = $request->getParam('$email');
+    $email = $request->getParam('email');
     $address = $request->getParam('address');
     $city = $request->getParam('city');
     $state = $request->getParam('state');
